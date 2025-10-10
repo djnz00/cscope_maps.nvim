@@ -16,7 +16,11 @@ M.run = function(opts)
 		pos_cmd = "aboveleft vertical"
 	end
 
-	vim.cmd(pos_cmd .. " lopen " .. opts.cscope.picker_opts.window_size)
+	if opts.cscope.picker_opts.open ~= false then
+		vim.cmd(pos_cmd .. " lopen " .. opts.cscope.picker_opts.window_size)
+	else
+		vim.cmd("lfirst")
+	end
 end
 
 return M
