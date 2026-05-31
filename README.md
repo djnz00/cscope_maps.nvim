@@ -31,9 +31,12 @@ Heavily inspired by emacs' [xcscope.el](https://github.com/dkogan/xcscope.el).
 
 ### Cscope DB
 
-- Statically provide table of db paths in config (`db_file`) OR add them at runtime using `:Cs db add ...`
-- `:Cs db add <space sepatated files>` add db file(s) to cscope search.
-- `:Cs db rm <space sepatated files>` remove db file(s) from cscope search.
+- Add DB files
+  - Statically provide table of db paths in config (`db_file`)
+  - `db_file` opt can be `function`. This function __must__ return table of db paths. This can be used to conditionally (e.g. based on `cwd`) add db paths.
+  - Add DB file at runtime using `:Cs db add ...`
+    - `:Cs db add <space sepatated files>` add db file(s) to cscope search.
+    - `:Cs db rm <space sepatated files>` remove db file(s) from cscope search.
 - `:Cs db show` show all db connections.
 - `:Cs db build` (re)builds db.
   - If `db_build_cmd.script == "default"` then only primary DB will be built using cscope binary.
@@ -56,6 +59,8 @@ Heavily inspired by emacs' [xcscope.el](https://github.com/dkogan/xcscope.el).
 - In `CsStackView` window, use following keymaps
   - `<tab>` toggle child under cursor
   - `<cr>` open location of symbol under cursor
+  - `<C-v>` open location of symbol under cursor in vertical split
+  - `<C-s>` open location of symbol under cursor in horizontal split
   - `q` or `<esc>` close window
   - `<C-u>` or `<C-y>` scroll up preview
   - `<C-d>` or `<C-e>` scroll down preview
@@ -145,6 +150,7 @@ _cscope_maps_ comes with following defaults:
   -- stack view defaults
   stack_view = {
     tree_hl = true, -- toggle tree highlighting
+    size = "medium", -- "medium" or "large" (large is 95% of screen)
   }
 }
 ```
